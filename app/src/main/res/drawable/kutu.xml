@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Arka plan rengi -->
+    <solid android:color="@color/material_dynamic_secondary90"/>
+
+    <!-- Köşelerin yuvarlaklığı -->
+    <corners android:radius="16dp"/>
+    <padding android:left="20dp"
+        android:right="20dp"
+        />
+    <!-- Kenarlık -->
+    <stroke
+        android:width="2dp"
+        android:color="#3700B3"/>
+</shape>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Arka plan rengi -->
+    <solid android:color="#ffffff" />
+
+    <!-- Köşelerin tamamen yuvarlak olması için yüksek bir radius değeri -->
+    <corners android:radius="50dp" />
+
+    <!-- Kenarlık (Opsiyonel) -->
+    <stroke
+        android:width="2dp"
+        android:color="#3700B3"/>
+</shape>
