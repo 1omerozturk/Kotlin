@@ -38,7 +38,6 @@
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold"
-
         app:cornerRadius="50dp"
         app:iconTint="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +49,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/textbg"
         android:layout_marginTop="25dp"
         android:textColor="#5C6BC0"
         android:textSize="34sp"

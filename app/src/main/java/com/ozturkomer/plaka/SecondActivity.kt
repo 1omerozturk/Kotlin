@@ -158,8 +158,10 @@ class SecondActivity : AppCompatActivity() {
 
     fun cevap(view: View, randomSayi: Int) {
         val buttonListesi = listOf(binding.btnA, binding.btnB, binding.btnC, binding.btnD)
+        buttonListesi.forEach{it.isEnabled=true}
         for (button in buttonListesi) {
             button.setOnClickListener {
+                buttonListesi.forEach{it.isEnabled=false}
                 val cevap = button.text.toString()
                 if (cevap == plakalar.get(randomSayi.toString())) {
                     dogru++;

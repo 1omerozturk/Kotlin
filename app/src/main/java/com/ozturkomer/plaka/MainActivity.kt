@@ -5,11 +5,17 @@ import android.graphics.Color
 import java.io.File
 import android.os.Bundle
 import android.provider.CalendarContract.Colors
+import android.text.Editable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextWatcher
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.ozturkomer.plaka.databinding.ActivityMainBinding
 import java.io.FileReader
 import java.util.Dictionary
@@ -112,16 +118,25 @@ class MainActivity : AppCompatActivity() {
             "80" to "OSMANİYE",
             "81" to "DÜZCE"
         )
-
+        binding.button.isVisible=false
         fun plakaBul() {
             if (binding.editTextText.text != null) {
             var sehir = binding.editTextText.text.toString()
 
-            if (sehir != null && sehir[0] == '0') {
+            if (sehir != "" && sehir[0] == '0') {
                 sehir = sehir.removeRange(0, 1)
             }
             if (plakalar.get(sehir) != null) {
-                binding.textView.text = "${sehir}: ${plakalar.get(sehir)}"
+
+                val fullText = "${sehir}: ${plakalar.get(sehir)}"
+                val spannableString = SpannableString(fullText)
+                val foregroundColorSpan = ForegroundColorSpan(Color.RED)
+
+                spannableString.setSpan(foregroundColorSpan, 0, sehir.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                binding.textView.text = spannableString
+
+                //binding.textView.text = "${sehir}: ${plakalar.get(sehir)}"
             } else {
                 binding.textView.textSize = 25f
                 binding.textView.setTextColor(Color.parseColor("#000000"))
@@ -129,6 +144,8 @@ class MainActivity : AppCompatActivity() {
             }
             }
             else {
+                binding.textView.textSize = 25f
+                binding.textView.setTextColor(Color.parseColor("#000000"))
                 binding.textView.text = "Lüten 1-81 arasında bir plaka giriniz."
             }
         }
@@ -136,11 +153,32 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.button.setOnClickListener {
+            if(binding.editTextText.text.toString()!=""){
+
                 binding.textView.setTextColor(Color.parseColor("#000000"))
                 plakaBul();
                 binding.editTextText.text.clear()
             }
+            }
+        binding.editTextText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                binding.textView.textSize = 25f
+                binding.textView.setTextColor(Color.parseColor("#000000"))
+                binding.textView.text = "Lüten 1-81 arasında bir plaka giriniz."
+            }
 
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(binding.editTextText.text.toString()!=""){
+                    binding.textView.textSize=30f
+                    binding.textView.setTextColor(Color.parseColor("#000000"))
+                    plakaBul();
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
     }
 
     fun nextPage(view: View) {
